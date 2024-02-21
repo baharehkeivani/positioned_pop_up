@@ -145,7 +145,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 ## Support and Feedback
 
-If you encounter any issues or have suggestions for improvements, feel free to open an issue on [GitHub]([https://github.com/your-username/popup_dialog/issues](https://github.com/baharehkeivani/positioned_pop_up.git)). Your feedback is highly appreciated!
+If you encounter any issues or have suggestions for improvements, feel free to open an issue on [GitHub](https://github.com/baharehkeivani/positioned_pop_up.git). Your feedback is highly appreciated!
 
 ## License
 
