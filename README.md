@@ -37,21 +37,17 @@ Now, you can create popup dialogs anywhere in your Flutter application. Here's a
 
 ```dart
 PositionedSimplePopUp(
-          position: Offset(
-            getButtonXPosition(),
-            _dialogPositionDy,
-          ),
-          barrierColor: Colors.transparent,
-          content: DialogClipRRect(
-            key: widget.key,
-            items: widget.items,
-            width: widget.width ?? 200,
-            height: widget.height,
-            borderRadius: widget.borderRadius,
-            backgroundColor: widget.backgroundColor,
-            backgroundIsBlurred: widget.backgroundIsBlurred,
-          ),
-        ).show(context);
+  position: Offset(
+    100,
+    200,
+  ),
+  barrierColor: Colors.red,
+  content: Container(
+    width: 200,
+    height: 100,
+    child: Text("Positioned Popup"),
+  ),
+).show(context);
 ```
 
 ## Example
