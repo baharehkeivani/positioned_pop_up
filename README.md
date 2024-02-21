@@ -1,39 +1,156 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Positioned Popup Package
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+This package provides a customizable popup dialog widget for Flutter applications. With this package, users can easily create popup dialogs with various customizations such as setting solid color backgrounds, gradient color backgrounds, and even blurred backgrounds. Additionally, this package addresses an issue with Flutter's popup menu button where the menu closes only after selecting an item or tapping outside the menu area.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- **Customizable Popup Dialog:** Easily create popup dialogs with custom backgrounds and styles.
+- **Solid Color Backgrounds:** Set solid color backgrounds for your popup dialogs.
+- **Gradient Color Backgrounds:** Apply gradient color backgrounds to enhance visual appeal.
+- **Blurred Backgrounds:** Add a blurred effect to the background for a modern look.
+- **Fixed Popup Menu Issue:** Resolve the issue with Flutter's popup menu button, ensuring it closes as expected.
 
-## Getting started
+## Installation
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+To use this package, add `positioned_pop_up` as a dependency in your `pubspec.yaml` file.
+
+```yaml
+dependencies:
+  positioned_pop_up: ^1.0.0
+```
+
+Then, run:
+
+```bash
+$ flutter pub get
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+Import the package in your Dart code:
 
 ```dart
-const like = 'sample';
+import 'package:positioned_pop_up/positioned_simple_pop_up.dart';
 ```
 
-## Additional information
+Now, you can create popup dialogs anywhere in your Flutter application. Here's a simple example:
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```dart
+PositionedSimplePopUp(
+          position: Offset(
+            getButtonXPosition(),
+            _dialogPositionDy,
+          ),
+          barrierColor: Colors.transparent,
+          content: DialogClipRRect(
+            key: widget.key,
+            items: widget.items,
+            width: widget.width ?? 200,
+            height: widget.height,
+            borderRadius: widget.borderRadius,
+            backgroundColor: widget.backgroundColor,
+            backgroundIsBlurred: widget.backgroundIsBlurred,
+          ),
+        ).show(context);
+```
+
+## Example
+
+Here's a more detailed example demonstrating various customizations:
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:positioned_pop_up/positioned_pop_up_button.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Positioned Popup',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const MyHomePage(title: 'Positioned Popup Package'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  Color color = Colors.yellow;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(widget.title),
+      ),
+      backgroundColor: Colors.grey,
+      body: Center(
+        child: PositionedPopUpButton(
+          button: Container(
+            padding: const EdgeInsets.all(10),
+            color: Colors.purple,
+            child: const Icon(Icons.touch_app),
+          ),
+          items: [
+            StatefulBuilder(
+              builder: (context, itemSetState) {
+                return InkWell(
+                  child: Container(
+                    color: color,
+                    child: const Text("First Item"),
+                  ),
+                  onHover: (value) {
+                    itemSetState(() {
+                      if (value) {
+                        color = Colors.deepOrangeAccent;
+                      } else {
+                        color = Colors.red;
+                      }
+                    });
+                  },
+                  onTap: () {
+                    itemSetState(() {
+                      color = Colors.purpleAccent;
+                    });
+                  },
+                );
+              },
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+```
+
+## Support and Feedback
+
+If you encounter any issues or have suggestions for improvements, feel free to open an issue on [GitHub](https://github.com/your-username/popup_dialog/issues). Your feedback is highly appreciated!
+
+## License
+
+This package is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+Enjoy using the Popup Dialog package in your Flutter projects! If you have any questions or need further assistance, don't hesitate to reach out.
