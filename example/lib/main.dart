@@ -41,40 +41,114 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       backgroundColor: Colors.grey,
-      body: Center(
-        child: PositionedPopUpButton(
-          button: Container(
-            padding: const EdgeInsets.all(10),
-            color: Colors.purple,
-            child: const Icon(Icons.touch_app),
-          ),
-          items: [
-            StatefulBuilder(
-              builder: (context, itemSetState) {
-                return InkWell(
-                  child: Container(
-                    color: color,
-                    child: const Text("First Item"),
-                  ),
-                  onHover: (value) {
-                    itemSetState(() {
-                      if (value) {
-                        color = Colors.deepOrangeAccent;
-                      } else {
-                        color = Colors.red;
-                      }
-                    });
-                  },
-                  onTap: () {
-                    itemSetState(() {
-                      color = Colors.purpleAccent;
-                    });
-                  },
-                );
-              },
-            )
-          ],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Divider(color: Colors.white,),
+          PositionedPopUpButton(backgroundIsBlurred: true,height: 150,
+            button: Container(
+              padding: const EdgeInsets.all(10),
+              color: Colors.purple,
+              child: const Icon(Icons.touch_app),
+            ),
+            items: [
+              StatefulBuilder(
+                builder: (context, itemSetState) {
+                  return InkWell(
+                    child: Container(
+                      height: 80,
+                      child: const Text("First Item"),
+                    ),
+                    onHover: (value) {
+                      itemSetState(() {
+                        if (value) {
+                          color = Colors.deepOrangeAccent;
+                        } else {
+                          color = Colors.red;
+                        }
+                      });
+                    },
+                    onTap: () {
+                      itemSetState(() {
+                        color = Colors.purpleAccent;
+                      });
+                    },
+                  );
+                },
+              ),StatefulBuilder(
+                builder: (context, itemSetState) {
+                  return InkWell(
+                    child: Container(
+                      height: 80,
+                      child: const Text("First Item"),
+                    ),
+                    onHover: (value) {
+                      itemSetState(() {
+                        if (value) {
+                          color = Colors.deepOrangeAccent;
+                        } else {
+                          color = Colors.red;
+                        }
+                      });
+                    },
+                    onTap: () {
+                      itemSetState(() {
+                        color = Colors.purpleAccent;
+                      });
+                    },
+                  );
+                },
+              ),StatefulBuilder(
+                builder: (context, itemSetState) {
+                  return InkWell(
+                    child: Container(
+                      height: 80,
+                      child: const Text("First Item"),
+                    ),
+                    onHover: (value) {
+                      itemSetState(() {
+                        if (value) {
+                          color = Colors.deepOrangeAccent;
+                        } else {
+                          color = Colors.red;
+                        }
+                      });
+                    },
+                    onTap: () {
+                      itemSetState(() {
+                        color = Colors.purpleAccent;
+                      });
+                    },
+                  );
+                },
+              ),StatefulBuilder(
+                builder: (context, itemSetState) {
+                  return InkWell(
+                    child: Container(
+                      height: 80,
+                      child: const Text("First Item"),
+                    ),
+                    onHover: (value) {
+                      itemSetState(() {
+                        if (value) {
+                          color = Colors.deepOrangeAccent;
+                        } else {
+                          color = Colors.red;
+                        }
+                      });
+                    },
+                    onTap: () {
+                      itemSetState(() {
+                        color = Colors.purpleAccent;
+                      });
+                    },
+                  );
+                },
+              ),
+            ],
+          ),Divider(color: Colors.white,),Divider(color: Colors.white,),
+          Divider(color: Colors.white,),
+        ],
       ),
     );
   }
