@@ -16,6 +16,7 @@ class PositionedPopUpButton extends StatefulWidget {
   final Color? backgroundColor;
   final bool backgroundIsBlurred;
   final double spaceBetweenMenuAndButton;
+  final EdgeInsetsGeometry? padding;
 
   const PositionedPopUpButton({
     super.key,
@@ -23,6 +24,7 @@ class PositionedPopUpButton extends StatefulWidget {
     required this.items,
     this.width,
     this.height,
+    this.padding,
     this.borderRadius,
     this.backgroundColor,
     this.backgroundIsBlurred = false,
@@ -87,6 +89,7 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
           content: DialogClipRRect(
             key: widget.key,
             items: widget.items,
+            padding: widget.padding,
             width: widget.width ?? 200,
             height: widget.height,
             borderRadius: widget.borderRadius,
