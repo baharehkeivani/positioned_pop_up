@@ -12,10 +12,11 @@ class PositionedPopUpButton extends StatefulWidget {
   final double? height;
   final List<Widget> items;
   final double? borderRadius;
+  final bool showPopUpInPlace;
   final Color? backgroundColor;
   final bool backgroundIsBlurred;
-  final double spaceBetweenMenuAndButton;
   final EdgeInsetsGeometry? padding;
+  final double spaceBetweenMenuAndButton;
 
   const PositionedPopUpButton({
     super.key,
@@ -26,6 +27,7 @@ class PositionedPopUpButton extends StatefulWidget {
     this.padding,
     this.borderRadius,
     this.backgroundColor,
+    this.showPopUpInPlace = false,
     this.backgroundIsBlurred = false,
     this.spaceBetweenMenuAndButton = 8,
   });
@@ -58,9 +60,13 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
         _buttonKey.currentContext!.findRenderObject() as RenderBox;
     _buttonPosition = renderBox.localToGlobal(Offset.zero);
     _buttonSize = renderBox.size;
-    _dialogPositionDy = _buttonPosition.dy +
-        _buttonSize.height +
-        widget.spaceBetweenMenuAndButton;
+    if (widget.showPopUpInPlace) {
+      _dialogPositionDy = _buttonPosition.dy;
+    } else {
+      _dialogPositionDy = _buttonPosition.dy +
+          _buttonSize.height +
+          widget.spaceBetweenMenuAndButton;
+    }
     if (!kIsWeb) {
       if (Platform.isIOS) {
         _dialogPositionDy -= AppBar().preferredSize.height;
@@ -90,10 +96,7 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
   void _onTap() {
     _updateButtonPosition();
     PositionedSimplePopUp(
-      position: Offset(
-        getButtonXPosition(),
-        _dialogPositionDy,
-      ),
+      position: Offset(getButtonXPosition(), _dialogPositionDy),
       barrierColor: Colors.transparent,
       content: DialogClipRRect(
         items: widget.items,

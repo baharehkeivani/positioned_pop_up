@@ -53,11 +53,12 @@ class _MyHomePageState extends State<MyHomePage> {
             color: Colors.purple,
             child: const Icon(Icons.touch_app),
           ),
+          showPopUpInPlace: true,
           items: [
             StatefulBuilder(
               builder: (context, itemSetState) {
                 return InkWell(
-                  child: Text("First Item",style: TextStyle(color: color)),
+                  child: Text("First Item", style: TextStyle(color: color)),
                   onHover: (value) {
                     itemSetState(() {
                       if (value) {
@@ -68,9 +69,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   onTap: () {
                     itemSetState(() {
                       color = Colors.purpleAccent;
-                      (popUpKey.currentWidget as PositionedPopUpButton)
-                          .updatePopUp();
                     });
+                    (popUpKey.currentWidget as PositionedPopUpButton)
+                        .updatePopUp();
                   },
                 );
               },
