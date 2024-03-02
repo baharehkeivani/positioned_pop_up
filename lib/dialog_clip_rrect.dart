@@ -40,7 +40,7 @@ class DialogClipRRect extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
           padding: const EdgeInsets.all(8),
-          child: ListView(shrinkWrap: true, children: items,padding: padding),
+          child: ListView(shrinkWrap: true,padding: padding, children: items),
         ),
       ),
     );

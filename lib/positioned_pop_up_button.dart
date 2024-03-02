@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
@@ -31,8 +30,9 @@ class PositionedPopUpButton extends StatefulWidget {
     this.spaceBetweenMenuAndButton = 8,
   });
 
-  void showPopUpManually() {
-    _PositionedPopUpButtonState().simulateTap();
+  void updatePopUp() {
+    ((key as GlobalKey).currentState as _PositionedPopUpButtonState)
+        .updatePopUp();
   }
 
   @override
@@ -82,35 +82,33 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
   Widget build(BuildContext context) {
     return GestureDetector(
       key: _buttonKey,
-      onTap: () {
-        _updateButtonPosition();
-        PositionedSimplePopUp(
-          position: Offset(
-            getButtonXPosition(),
-            _dialogPositionDy,
-          ),
-          barrierColor: Colors.transparent,
-          content: DialogClipRRect(
-            items: widget.items,
-            padding: widget.padding,
-            width: widget.width ?? 200,
-            height: widget.height,
-            borderRadius: widget.borderRadius,
-            backgroundColor: widget.backgroundColor,
-            backgroundIsBlurred: widget.backgroundIsBlurred,
-          ),
-        ).show(context);
-      },
+      onTap: _onTap,
       child: widget.button,
     );
   }
 
-  void simulateTap() {
-    GestureBinding.instance.handlePointerEvent(
-      PointerDownEvent(position: Offset(
-        getButtonXPosition() + 1,
-        _dialogPositionDy + 1,
-      )),
-    );
+  void _onTap() {
+    _updateButtonPosition();
+    PositionedSimplePopUp(
+      position: Offset(
+        getButtonXPosition(),
+        _dialogPositionDy,
+      ),
+      barrierColor: Colors.transparent,
+      content: DialogClipRRect(
+        items: widget.items,
+        padding: widget.padding,
+        width: widget.width ?? 200,
+        height: widget.height,
+        borderRadius: widget.borderRadius,
+        backgroundColor: widget.backgroundColor,
+        backgroundIsBlurred: widget.backgroundIsBlurred,
+      ),
+    ).show(context);
+  }
+
+  void updatePopUp() {
+    Navigator.pop(context);
+    _onTap();
   }
 }
