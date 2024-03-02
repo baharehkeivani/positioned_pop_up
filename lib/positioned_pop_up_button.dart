@@ -1,11 +1,12 @@
 import 'dart:io';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
 import 'dialog_clip_rrect.dart';
 import 'package:positioned_pop_up/positioned_simple_pop_up.dart';
-
+import 'package:flutter_test/flutter_test.dart';
 
 class PositionedPopUpButton extends StatefulWidget {
   final Widget button;
@@ -28,6 +29,10 @@ class PositionedPopUpButton extends StatefulWidget {
     this.backgroundIsBlurred = false,
     this.spaceBetweenMenuAndButton = 8,
   });
+
+  void showPopUpManually() {
+    _PositionedPopUpButtonState().simulateTap();
+  }
 
   @override
   State<PositionedPopUpButton> createState() => _PositionedPopUpButtonState();
@@ -68,7 +73,7 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
     if (leftWidth > MediaQuery.sizeOf(context).width) {
       return leftWidth;
     } else {
-      return _buttonPosition.dx ;
+      return _buttonPosition.dx;
     }
   }
 
@@ -96,6 +101,24 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
         ).show(context);
       },
       child: widget.button,
+    );
+  }
+
+  void simulateTap() {
+    final gesture = TestWidgetsFlutterBinding.ensureInitialized();
+    Offset tapPosition = Offset(
+      getButtonXPosition() + 1,
+      _dialogPositionDy + 1,
+    );
+    final HitTestResult result = HitTestResult();
+    WidgetsBinding.instance.hitTestInView(result, tapPosition, 0);
+    gesture.dispatchEvent(
+      PointerDownEvent(position: tapPosition, pointer: 1),
+      result,
+    );
+    gesture.dispatchEvent(
+      PointerUpEvent(position: tapPosition, pointer: 1),
+      result,
     );
   }
 }
