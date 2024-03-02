@@ -31,7 +31,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Color color = Colors.yellow;
+  bool list = false;
 
   GlobalKey popUpKey = GlobalKey();
 
@@ -53,30 +53,52 @@ class _MyHomePageState extends State<MyHomePage> {
             color: Colors.purple,
             child: const Icon(Icons.touch_app),
           ),
-          showPopUpInPlace: true,
-          items: [
-            StatefulBuilder(
-              builder: (context, itemSetState) {
-                return InkWell(
-                  child: Text("First Item", style: TextStyle(color: color)),
-                  onHover: (value) {
-                    itemSetState(() {
-                      if (value) {
-                        color = Colors.deepOrangeAccent;
-                      }
-                    });
-                  },
-                  onTap: () {
-                    itemSetState(() {
-                      color = Colors.purpleAccent;
-                    });
-                    (popUpKey.currentWidget as PositionedPopUpButton)
-                        .updatePopUp();
-                  },
-                );
-              },
-            ),
-          ],
+          items: !list
+              ? [
+                  StatefulBuilder(
+                    builder: (context, itemSetState) {
+                      return InkWell(
+                        child: const Text("1"),
+                        onTap: () {
+                          setState(() {
+                            list = !list;
+                          });
+                          (popUpKey.currentWidget as PositionedPopUpButton)
+                              .updatePopUp();
+                        },
+                      );
+                    },
+                  ),
+                ]
+              : [
+                  StatefulBuilder(
+                    builder: (context, itemSetState) {
+                      return InkWell(
+                        child: const Text("2"),
+                        onTap: () {setState(() {
+                          list = !list;
+                        });
+                          (popUpKey.currentWidget as PositionedPopUpButton)
+                              .updatePopUp();
+                        },
+                      );
+                    },
+                  ),
+                  StatefulBuilder(
+                    builder: (context, itemSetState) {
+                      return InkWell(
+                        child: const Text("3"),
+                        onTap: () {
+                          setState(() {
+                            list = !list;
+                          });
+                          (popUpKey.currentWidget as PositionedPopUpButton)
+                              .updatePopUp();
+                        },
+                      );
+                    },
+                  ),
+                ],
         ),
       ),
     );

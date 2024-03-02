@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
@@ -8,14 +7,14 @@ import 'package:positioned_pop_up/positioned_simple_pop_up.dart';
 
 class PositionedPopUpButton extends StatefulWidget {
   final Widget button;
-  final double? width;
+  final   double? width;
   final double? height;
   final List<Widget> items;
-  final double? borderRadius;
+  final   double? borderRadius;
   final bool showPopUpInPlace;
   final Color? backgroundColor;
-  final bool backgroundIsBlurred;
-  final EdgeInsetsGeometry? padding;
+  final  bool backgroundIsBlurred;
+  final  EdgeInsetsGeometry? padding;
   final double spaceBetweenMenuAndButton;
 
   const PositionedPopUpButton({
@@ -110,8 +109,9 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
     ).show(context);
   }
 
-  void updatePopUp() {
+  Future<void> updatePopUp() async {
     Navigator.pop(context);
+    await Future.delayed(const Duration(milliseconds: 50));
     _onTap();
   }
 }
