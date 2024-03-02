@@ -92,7 +92,6 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
           ),
           barrierColor: Colors.transparent,
           content: DialogClipRRect(
-            key: widget.key,
             items: widget.items,
             padding: widget.padding,
             width: widget.width ?? 200,
