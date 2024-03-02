@@ -107,20 +107,29 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
   }
 
   void simulateTap() {
-    final gesture = TestWidgetsFlutterBinding.ensureInitialized();
-    Offset tapPosition = Offset(
-      getButtonXPosition() + 1,
-      _dialogPositionDy + 1,
+
+    GestureBinding.instance.handlePointerEvent(
+      PointerDownEvent(position: Offset(
+        getButtonXPosition() + 1,
+        _dialogPositionDy + 1,
+      )),
     );
-    final HitTestResult result = HitTestResult();
-    WidgetsBinding.instance.hitTestInView(result, tapPosition, 0);
-    gesture.dispatchEvent(
-      PointerDownEvent(position: tapPosition, pointer: 1),
-      result,
-    );
-    gesture.dispatchEvent(
-      PointerUpEvent(position: tapPosition, pointer: 1),
-      result,
-    );
+
+
+    // final gesture = TestWidgetsFlutterBinding.ensureInitialized();
+    // Offset tapPosition = Offset(
+    //   getButtonXPosition() + 1,
+    //   _dialogPositionDy + 1,
+    // );
+    // final HitTestResult result = HitTestResult();
+    // WidgetsBinding.instance.hitTestInView(result, tapPosition, 0);
+    // gesture.dispatchEvent(
+    //   PointerDownEvent(position: tapPosition, pointer: 1),
+    //   result,
+    // );
+    // gesture.dispatchEvent(
+    //   PointerUpEvent(position: tapPosition, pointer: 1),
+    //   result,
+    // );
   }
 }
