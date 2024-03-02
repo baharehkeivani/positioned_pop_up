@@ -6,7 +6,6 @@ import 'package:flutter/foundation.dart';
 
 import 'dialog_clip_rrect.dart';
 import 'package:positioned_pop_up/positioned_simple_pop_up.dart';
-import 'package:flutter_test/flutter_test.dart';
 
 class PositionedPopUpButton extends StatefulWidget {
   final Widget button;
@@ -107,29 +106,11 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
   }
 
   void simulateTap() {
-
     GestureBinding.instance.handlePointerEvent(
       PointerDownEvent(position: Offset(
         getButtonXPosition() + 1,
         _dialogPositionDy + 1,
       )),
     );
-
-
-    // final gesture = TestWidgetsFlutterBinding.ensureInitialized();
-    // Offset tapPosition = Offset(
-    //   getButtonXPosition() + 1,
-    //   _dialogPositionDy + 1,
-    // );
-    // final HitTestResult result = HitTestResult();
-    // WidgetsBinding.instance.hitTestInView(result, tapPosition, 0);
-    // gesture.dispatchEvent(
-    //   PointerDownEvent(position: tapPosition, pointer: 1),
-    //   result,
-    // );
-    // gesture.dispatchEvent(
-    //   PointerUpEvent(position: tapPosition, pointer: 1),
-    //   result,
-    // );
   }
 }
