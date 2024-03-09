@@ -97,7 +97,7 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
 
   void _onTap() {
     if (widget.onTap != null) {
-      widget.onTap();
+      widget.onTap!();
     }
     _updateButtonPosition();
     PositionedSimplePopUp(
