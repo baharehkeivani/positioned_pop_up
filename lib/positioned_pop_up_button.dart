@@ -7,14 +7,16 @@ import 'package:positioned_pop_up/positioned_simple_pop_up.dart';
 
 class PositionedPopUpButton extends StatefulWidget {
   final Widget button;
-  final   double? width;
+  final double? width;
   final double? height;
   final List<Widget> items;
-  final   double? borderRadius;
+  final double? borderRadius;
   final bool showPopUpInPlace;
   final Color? backgroundColor;
-  final  bool backgroundIsBlurred;
-  final  EdgeInsetsGeometry? padding;
+  final void Function()? onTap;
+  final bool backgroundIsBlurred;
+  final EdgeInsetsGeometry? padding;
+
   final double spaceBetweenMenuAndButton;
 
   const PositionedPopUpButton({
@@ -23,6 +25,7 @@ class PositionedPopUpButton extends StatefulWidget {
     required this.items,
     this.width,
     this.height,
+    this.onTap,
     this.padding,
     this.borderRadius,
     this.backgroundColor,
@@ -93,6 +96,7 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
   }
 
   void _onTap() {
+    widget.onTap!();
     _updateButtonPosition();
     PositionedSimplePopUp(
       position: Offset(getButtonXPosition(), _dialogPositionDy),
