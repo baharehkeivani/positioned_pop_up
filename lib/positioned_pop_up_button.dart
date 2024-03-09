@@ -96,9 +96,6 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
   }
 
   void _onTap() {
-    if (widget.onTap != null) {
-      widget.onTap!();
-    }
     _updateButtonPosition();
     PositionedSimplePopUp(
       position: Offset(getButtonXPosition(), _dialogPositionDy),
@@ -113,6 +110,9 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
         backgroundIsBlurred: widget.backgroundIsBlurred,
       ),
     ).show(context);
+    if (widget.onTap != null) {
+      widget.onTap!();
+    }
   }
 
   Future<void> updatePopUp() async {
