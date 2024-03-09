@@ -13,7 +13,6 @@ class PositionedPopUpButton extends StatefulWidget {
   final double? borderRadius;
   final bool showPopUpInPlace;
   final Color? backgroundColor;
-  final void Function()? onTap;
   final bool backgroundIsBlurred;
   final EdgeInsetsGeometry? padding;
 
@@ -25,7 +24,6 @@ class PositionedPopUpButton extends StatefulWidget {
     required this.items,
     this.width,
     this.height,
-    this.onTap,
     this.padding,
     this.borderRadius,
     this.backgroundColor,
@@ -110,9 +108,6 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
         backgroundIsBlurred: widget.backgroundIsBlurred,
       ),
     ).show(context);
-    if (widget.onTap != null) {
-      widget.onTap!();
-    }
   }
 
   Future<void> updatePopUp() async {
