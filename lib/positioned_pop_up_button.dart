@@ -7,14 +7,14 @@ import 'package:positioned_pop_up/positioned_simple_pop_up.dart';
 
 class PositionedPopUpButton extends StatefulWidget {
   final Widget button;
-  final   double? width;
+  final double? width;
   final double? height;
   final List<Widget> items;
-  final   double? borderRadius;
+  final double? borderRadius;
   final bool showPopUpInPlace;
   final Color? backgroundColor;
-  final  bool backgroundIsBlurred;
-  final  EdgeInsetsGeometry? padding;
+  final bool backgroundIsBlurred;
+  final EdgeInsetsGeometry? padding;
   final double spaceBetweenMenuAndButton;
 
   const PositionedPopUpButton({
@@ -36,6 +36,9 @@ class PositionedPopUpButton extends StatefulWidget {
         .updatePopUp();
   }
 
+  bool get isOpen =>
+      ((key as GlobalKey).currentState as _PositionedPopUpButtonState).isOpen;
+
   @override
   State<PositionedPopUpButton> createState() => _PositionedPopUpButtonState();
 }
@@ -47,6 +50,8 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
   final GlobalKey _buttonKey = GlobalKey();
 
   late bool _isOpen;
+
+  bool get isOpen => _isOpen;
 
   @override
   void initState() {
