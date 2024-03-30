@@ -15,6 +15,7 @@ class PositionedPopUpButton extends StatefulWidget {
   final Color? backgroundColor;
   final bool backgroundIsBlurred;
   final EdgeInsetsGeometry? padding;
+  final void Function()? onClosePopUp;
   final double spaceBetweenMenuAndButton;
 
   const PositionedPopUpButton({
@@ -25,6 +26,7 @@ class PositionedPopUpButton extends StatefulWidget {
     this.height,
     this.padding,
     this.borderRadius,
+    this.onClosePopUp,
     this.backgroundColor,
     this.showPopUpInPlace = false,
     this.backgroundIsBlurred = false,
@@ -36,9 +38,6 @@ class PositionedPopUpButton extends StatefulWidget {
         .updatePopUp();
   }
 
-  bool get isOpen =>
-      ((key as GlobalKey).currentState as _PositionedPopUpButtonState).isOpen;
-
   @override
   State<PositionedPopUpButton> createState() => _PositionedPopUpButtonState();
 }
@@ -48,10 +47,6 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
   late Size _buttonSize;
   late Offset _buttonPosition;
   final GlobalKey _buttonKey = GlobalKey();
-
-  bool _isOpen = false;
-
-  bool get isOpen => _isOpen;
 
   @override
   void initState() {
@@ -100,7 +95,6 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
   }
 
   void _onTap() {
-    _isOpen = true;
     _updateButtonPosition();
     PositionedSimplePopUp(
       position: Offset(getButtonXPosition(), _dialogPositionDy),
@@ -114,9 +108,7 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
         backgroundColor: widget.backgroundColor,
         backgroundIsBlurred: widget.backgroundIsBlurred,
       ),
-      onClosePopUp: () {
-        _isOpen = true;
-      },
+      onClosePopUp: widget.onClosePopUp,
     ).show(context);
   }
 
