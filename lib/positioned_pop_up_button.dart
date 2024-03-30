@@ -46,8 +46,11 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
   late Offset _buttonPosition;
   final GlobalKey _buttonKey = GlobalKey();
 
+  late bool _isOpen;
+
   @override
   void initState() {
+    _isOpen = false;
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _updateButtonPosition();
@@ -93,6 +96,7 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
   }
 
   void _onTap() {
+    _isOpen = true;
     _updateButtonPosition();
     PositionedSimplePopUp(
       position: Offset(getButtonXPosition(), _dialogPositionDy),
@@ -106,6 +110,9 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
         backgroundColor: widget.backgroundColor,
         backgroundIsBlurred: widget.backgroundIsBlurred,
       ),
+      onClosePopUp: () {
+        _isOpen = true;
+      },
     ).show(context);
   }
 
