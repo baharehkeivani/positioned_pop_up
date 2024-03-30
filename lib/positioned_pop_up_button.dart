@@ -49,13 +49,12 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
   late Offset _buttonPosition;
   final GlobalKey _buttonKey = GlobalKey();
 
-  late bool _isOpen;
+  bool _isOpen = false;
 
   bool get isOpen => _isOpen;
 
   @override
   void initState() {
-    _isOpen = false;
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _updateButtonPosition();
