@@ -15,6 +15,7 @@ class PositionedPopUpButton extends StatefulWidget {
   final Color? backgroundColor;
   final bool backgroundIsBlurred;
   final EdgeInsetsGeometry? padding;
+  final void Function()? onButtonTap;
   final void Function()? onClosePopUp;
   final double spaceBetweenMenuAndButton;
 
@@ -25,6 +26,7 @@ class PositionedPopUpButton extends StatefulWidget {
     this.width,
     this.height,
     this.padding,
+    this.onButtonTap,
     this.borderRadius,
     this.onClosePopUp,
     this.backgroundColor,
@@ -96,6 +98,7 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
 
   void _onTap() {
     _updateButtonPosition();
+    widget.onButtonTap?.call();
     PositionedSimplePopUp(
       position: Offset(getButtonXPosition(), _dialogPositionDy),
       barrierColor: Colors.transparent,
