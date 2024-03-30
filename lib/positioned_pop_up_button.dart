@@ -7,14 +7,14 @@ import 'package:positioned_pop_up/positioned_simple_pop_up.dart';
 
 class PositionedPopUpButton extends StatefulWidget {
   final Widget button;
-  final   double? width;
+  final double? width;
   final double? height;
   final List<Widget> items;
-  final   double? borderRadius;
+  final double? borderRadius;
   final bool showPopUpInPlace;
   final Color? backgroundColor;
-  final  bool backgroundIsBlurred;
-  final  EdgeInsetsGeometry? padding;
+  final bool backgroundIsBlurred;
+  final EdgeInsetsGeometry? padding;
   final double spaceBetweenMenuAndButton;
 
   const PositionedPopUpButton({
@@ -36,6 +36,9 @@ class PositionedPopUpButton extends StatefulWidget {
         .updatePopUp();
   }
 
+  bool get isOpen =>
+      ((key as GlobalKey).currentState as _PositionedPopUpButtonState).isOpen;
+
   @override
   State<PositionedPopUpButton> createState() => _PositionedPopUpButtonState();
 }
@@ -45,6 +48,8 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
   late Size _buttonSize;
   late Offset _buttonPosition;
   final GlobalKey _buttonKey = GlobalKey();
+
+  bool _isOpen = false;
 
   @override
   void initState() {
@@ -93,6 +98,7 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
   }
 
   void _onTap() {
+    _isOpen = true;
     _updateButtonPosition();
     PositionedSimplePopUp(
       position: Offset(getButtonXPosition(), _dialogPositionDy),
@@ -106,6 +112,9 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
         backgroundColor: widget.backgroundColor,
         backgroundIsBlurred: widget.backgroundIsBlurred,
       ),
+      onClosePopUp: () {
+        _isOpen = false;
+      },
     ).show(context);
   }
 
@@ -114,4 +123,6 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
     await Future.delayed(const Duration(milliseconds: 50));
     _onTap();
   }
+
+  bool get isOpen => _isOpen;
 }

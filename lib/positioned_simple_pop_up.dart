@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -6,6 +7,7 @@ class PositionedSimplePopUp extends StatefulWidget {
   final Color? barrierColor;
   final Gradient? barrierGradient;
   final Widget content;
+  final void Function()? onClosePopUp;
 
   const PositionedSimplePopUp({
     super.key,
@@ -13,6 +15,7 @@ class PositionedSimplePopUp extends StatefulWidget {
     this.barrierGradient,
     required this.content,
     required this.position,
+    this.onClosePopUp,
   });
 
   @override
@@ -30,6 +33,7 @@ class PositionedSimplePopUp extends StatefulWidget {
           position: position,
           barrierColor: barrierColor,
           barrierGradient: barrierGradient,
+          onClosePopUp: onClosePopUp,
         ),
       ),
     );
@@ -44,8 +48,8 @@ class _PositionedSimplePopUpState extends State<PositionedSimplePopUp> {
       child: Stack(
         children: [
           GestureDetector(
-            onTap: () => Navigator.pop(context),
-            onVerticalDragUpdate: (details) => Navigator.pop(context),
+            onTap: _onClose,
+            onVerticalDragUpdate: (details) => _onClose(),
             child: Listener(
               onPointerSignal: (PointerSignalEvent event) {
                 if (event is PointerScrollEvent) {
@@ -70,5 +74,10 @@ class _PositionedSimplePopUpState extends State<PositionedSimplePopUp> {
         ],
       ),
     );
+  }
+
+  void _onClose() {
+    widget.onClosePopUp?.call();
+    Navigator.pop(context);
   }
 }
