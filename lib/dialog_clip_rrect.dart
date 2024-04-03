@@ -10,6 +10,7 @@ class DialogClipRRect extends StatelessWidget {
   final Color? backgroundColor;
   final bool backgroundIsBlurred;
   final EdgeInsetsGeometry? padding;
+  final ScrollController? itemsScrollController;
 
   const DialogClipRRect({
     super.key,
@@ -19,6 +20,7 @@ class DialogClipRRect extends StatelessWidget {
     required this.items,
     this.backgroundColor,
     this.borderRadius = 12,
+    this.itemsScrollController,
     this.backgroundIsBlurred = false,
   });
 
@@ -40,7 +42,12 @@ class DialogClipRRect extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
           ),
           padding: const EdgeInsets.all(8),
-          child: ListView(shrinkWrap: true, padding: padding, children: items),
+          child: ListView(
+            controller: itemsScrollController,
+            shrinkWrap: true,
+            padding: padding,
+            children: items,
+          ),
         ),
       ),
     );

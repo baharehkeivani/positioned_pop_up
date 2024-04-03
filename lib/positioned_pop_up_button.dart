@@ -18,6 +18,7 @@ class PositionedPopUpButton extends StatefulWidget {
   final void Function()? onButtonTap;
   final void Function()? onClosePopUp;
   final double spaceBetweenMenuAndButton;
+  final ScrollController? itemsScrollController;
 
   const PositionedPopUpButton({
     super.key,
@@ -30,9 +31,11 @@ class PositionedPopUpButton extends StatefulWidget {
     this.borderRadius,
     this.onClosePopUp,
     this.backgroundColor,
+    this.itemsScrollController,
     this.showPopUpInPlace = false,
     this.backgroundIsBlurred = false,
     this.spaceBetweenMenuAndButton = 8,
+
   });
 
   void updatePopUp() {
@@ -110,6 +113,7 @@ class _PositionedPopUpButtonState extends State<PositionedPopUpButton> {
         borderRadius: widget.borderRadius,
         backgroundColor: widget.backgroundColor,
         backgroundIsBlurred: widget.backgroundIsBlurred,
+        itemsScrollController : widget.itemsScrollController,
       ),
       onClosePopUp: widget.onClosePopUp,
     ).show(context);
